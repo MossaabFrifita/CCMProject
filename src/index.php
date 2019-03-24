@@ -1,3 +1,13 @@
+<?php
+
+require "instagramAPI.php";
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en-IN">
 <head>
@@ -6,6 +16,20 @@
 <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet'>
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel='stylesheet'>
 <style>
+    .instagram {
+        display: inline-block;
+        width: 250px;
+        height: 250px;
+        text-align: center;
+        border-radius: 40px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 70px;
+        vertical-align: middle;
+        background: #d6249f;
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+        box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+    }
 body{font-family: 'Ropa Sans', sans-serif; color:#666; font-size:14px; color:#333}
 li,ul,body,input{margin:0; padding:0; list-style:none}
 #login-form{width:350px; background:#FFF; margin:0 auto; margin-top:70px; background:#f8f8f8; overflow:hidden; border-radius:7px}
@@ -69,16 +93,14 @@ li,ul,body,input{margin:0; padding:0; list-style:none}
 <li><input type="email" required class="input" placeholder="Your Email"/><span class="icon"><i class="fa fa-user"></i></span></li>
 <li><input type="password" required class="input" placeholder="Password"/><span class="icon"><i class="fa fa-lock"></i></span></li>
 <li><span class="remember"><input type="checkbox" id="check"> <label for="check">Remember Me</label></span><span class="remember"><a href="">Forget Password</a></span></li>
-<li><input type="submit" value="SIGN IN" class="btn"></li>
+<li><input  type="button" class="btn" value="SIGN IN"></li>
 </ul>
 </form>
 </div>
 
-<div class="social-login">Or sign in with &nbsp;
-<a href="" class="fb"><i class="fa fa-facebook"></i></a>
-<a href="" class="tw"><i class="fa fa-twitter"></i></a>
-<a href="" class="gp"><i class="fa fa-google-plus"></i></a>
-<a href="" class="in"><i class="fa fa-linkedin"></i></a>
+<div  class="social-login">Or sign in with Instagram&nbsp;
+<a  onclick="javascript:window.location='<?php echo $instagram->getLoginURL() ?>'" class="instagram"><i class="fa fa-instagram"></i></a>
+
 </div>
 </section>
 
