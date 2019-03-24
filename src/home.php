@@ -121,7 +121,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
       <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Albums</button>
         <button class="w3-button w3-black fa fa-plus"> Add</button>
-        <button style="margin-left: 650px" class="w3-button w3-white w3-hide-small"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
+        <button onclick="logout()" style="margin-left: 650px" class="w3-button w3-white w3-hide-small"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
     </div>
     </div>
   </header>
@@ -164,9 +164,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </table>
 
 </div>
+
+
 </body>
+<script>
+    function logout() {
+        <?php session_destroy();?>
+        document.location.replace('index.php');
+    }
+</script>
 </html>
 
-<?php
-//session_destroy();
-?>
