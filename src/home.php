@@ -10,6 +10,9 @@ if(!isset($_SESSION['loggedIn'])){
 <title>Instagram Poster</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -120,8 +123,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <span class="w3-margin-right">Filter:</span> 
 
       <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Albums</button>
-        <button class="w3-button w3-black fa fa-plus"> Add</button>
-        <button onclick="logout()" style="margin-left: 650px" class="w3-button w3-white w3-hide-small"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
+        <button class="w3-button w3-black fa fa-plus" data-toggle="modal" data-target="#tagsModal"> Add one with Tags</button>
+        <button class="w3-button w3-black fa fa-plus" data-toggle="modal" data-target="#mapsModal"> Add one with Position</button>
+        <button onclick="logout()" style="margin-left: 350px" class="w3-button w3-white w3-hide-small"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
     </div>
     </div>
   </header>
@@ -164,12 +168,74 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </table>
 
 </div>
+<!-- Modal -->
+<div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new album</h5>
 
 
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter description">
+                        <small id="emailHelp" class="form-text text-muted">Describe your folder for remember it.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Tags</label>
+                        <input type="text" class="form-control"  placeholder="#tags">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="mapsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new album</h5>
+
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description</label>
+                        <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter description">
+                        <small id="emailHelp" class="form-text text-muted">Describe your folder for remember it.</small>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
 </body>
 <script>
     function logout() {
-        <?php session_destroy();?>
+        <?php session_destroy(); ?>
         document.location.replace('index.php');
     }
 </script>
