@@ -25,8 +25,8 @@ require "instagramAPI.php";
     <!-- //Meta-Tags -->
 	
 	<!-- css files -->
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link  href="https://insatgramposter.appspot.com/stylesheets/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- //css files -->
 	
 	<!-- google fonts -->
@@ -45,7 +45,7 @@ require "instagramAPI.php";
 					<h1>Manage Your Instagram Poster</h1>
 					
 					<p>Create catalogs from photos posted on Instagram.</p><br>
-					<img src="images/image.jpg" alt="" />
+					<img src="https://insatgramposter.appspot.com/images/image.jpg" alt="" />
 				</div>
 			</div>
 			<div class="w3_info">
