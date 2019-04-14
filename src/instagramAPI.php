@@ -17,7 +17,7 @@
 
 
         public function getLoginURL(){
-            return "https://api.instagram.com/oauth/authorize/?client_id=".$this->clientID."&redirect_uri=".$this->redirectURI."&response_type=code";
+            return "https://api.instagram.com/oauth/authorize/?client_id=".$this->clientID."&redirect_uri=".$this->redirectURI."&response_type=code&hl=en&scope=basic+public_content";
         }
 
         public function getAccessTokenAndUserDetails($code){
