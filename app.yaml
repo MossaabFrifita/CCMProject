@@ -1,0 +1,8 @@
+runtime: php72
+handlers:
+- url: /stylesheets
+  static_dir: src/css
+- url: /images
+  static_dir: src/images 
+- url: /fonts
+  static_dir: src/fonts  
