@@ -5,4 +5,8 @@ handlers:
 - url: /images
   static_dir: src/images 
 - url: /fonts
-  static_dir: src/fonts  
+  static_dir: src/fonts
+env_variables:
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/insatgramposter:europe-west1:db-instagram-poster;dbname=dbIntagramPoster
+  MYSQL_USER: root
+  MYSQL_PASSWORD: root  
