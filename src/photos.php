@@ -9,10 +9,9 @@ function scrape_insta_hash($tag) {
 	$insta_array = json_decode($insta_json[0], TRUE);
 	return $insta_array; // this return a lot things print it and see what else you need
 }
-$tag = 'tunis'; // tag for which ou want images 
+$tag = $_GET['tag']; // tag for which ou want images
 $results_array = scrape_insta_hash($tag);
-//$limit = 7; //previous was only limit to 7 images
-$limit = 15; // provide the limit thats important because one page only give some images.
+$limit = 15;
 $image_array= array(); // array to store images.
 	for ($i=0; $i < $limit; $i++) { 
 		//previous code to get images from json 	
@@ -78,8 +77,7 @@ $image_array= array(); // array to store images.
 </head>
 <body>
 
-<h2>Responsive Image Gallery</h2>
-<h4>Resize the browser window to see the effect.</h4>
+<h2>Image Gallery For your album</h2>
 
 
 
@@ -87,7 +85,7 @@ $image_array= array(); // array to store images.
 
 <div class="responsive">
 	<div class="gallery">
-		<a target="_blank" href="img_5terre.jpg">
+		<a target="_blank">
 		<?php echo $image; ?>
 		</a>
 	</div>
@@ -97,10 +95,7 @@ $image_array= array(); // array to store images.
 
 <div class="clearfix"></div>
 
-<div style="padding:6px;">
-	<p>This example use media queries to re-arrange the images on different screen sizes: for screens larger than 700px wide, it will show four images side by side, for screens smaller than 700px, it will show two images side by side. For screens smaller than 500px, the images will stack vertically (100%).</p>
-	<p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
-</div>
+
 
 </body>
 </html>

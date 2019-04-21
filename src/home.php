@@ -183,7 +183,7 @@ div.desc {
 <?php foreach ($list as $row) { ?>
 <div class="responsive">
   <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
+    <a target="_blank" href="https://insatgramposter.appspot.com/photos?tag=<?php echo $row["tag"]; ?>">
       <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
     </a>
     <div class="desc">#<?php echo $row["tag"]; echo " "; echo $row["nb_tag"]; ?> photo(s)</br>
