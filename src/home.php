@@ -1,9 +1,12 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['loggedIn'])){
     echo "<script type='text/javascript'>document.location.replace('index.php');</script>";
 
 }
+include "getAlbums.php";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,6 +98,52 @@ if(!isset($_SESSION['loggedIn'])){
         color: #dc2a2a;
     }
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 </style>
 <body  class="w3-light-grey w3-content" style="max-width:1600px">
 <!-- Sidebar/menu -->
@@ -122,52 +171,28 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div class="w3-section w3-bottombar w3-padding-16">
       <span class="w3-margin-right">Filter:</span> 
 
-      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Albums</button>
-        <button class="w3-button w3-black fa fa-plus" data-toggle="modal" data-target="#tagsModal"> Add one with Tags</button>
-        <button class="w3-button w3-black fa fa-plus" data-toggle="modal" data-target="#mapsModal"> Add one with Position</button>
-        <button onclick="logout()" style="margin-left: 350px" class="w3-button w3-white w3-hide-small"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
+        <button class="w3-button fa-picture-o"><i class="fa fa-photo w3-margin-right"></i>Albums</button>
+        <button class="w3-button w3-green fa fa-plus" data-toggle="modal" data-target="#tagsModal"> Add one with Tags</button>
+        <button class="w3-button w3-green fa fa-plus" data-toggle="modal" data-target="#mapsModal"> Add one with Position</button>
+        <button onclick="logout()" style="margin-left: 350px" class="w3-button w3-white"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
     </div>
     </div>
   </header>
 <!-- End page content -->
 
-    <table>
-        <thead>
-        <tr>
-            <th colspan="3">List of your albums</th>
-        </tr>
-
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Description of album </td>
-            <td>
-                <i class="material-icons button edit">show</i>
-                <i class="material-icons button delete">delete</i>
-            </td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Description of album </td>
-            <td>
-                <i class="material-icons button edit">show</i>
-                <i class="material-icons button delete">delete</i>
-            </td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Description of album </td>
-            <td>
-                <i class="material-icons button edit">show</i>
-                <i class="material-icons button delete">delete</i>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
-
+<?php foreach ($list as $row) { ?>
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="https://insatgramposter.appspot.com/photos?tag=<?php echo $row["tag"]; ?>">
+      <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
+    </a>
+    <div class="desc">#<?php echo $row["tag"]; echo " "; echo $row["nb_tag"]; ?> photo(s)</br>
+    <i class="material-icons button delete"><a href ="https://insatgramposter.appspot.com/deleteAlbum?id=<?php echo $row["id"]; ?>" onclick="return confirm('Are you sure?')">delete</a></i></div>
+  </div>
 </div>
+<?php } ?>
+</div>
+<form name="formAddTagAlbum" action="0bdf0dbfd352fea6439ef063ca91233b" onsubmit="return validateForm()" method="GET">
 <!-- Modal -->
 <div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -181,25 +206,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Description</label>
-                        <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter description">
-                        <small id="emailHelp" class="form-text text-muted">Describe your folder for remember it.</small>
+                        <label for="exampleInputPassword1">Tag</label>
+                        <input type="text" name="tag" class="form-control"  placeholder="#tag">
+                        <small id="emailHelp" class="form-text text-muted">Add tag without space.</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Tags</label>
-                        <input type="text" class="form-control"  placeholder="#tags">
+                        <label for="exampleInputPassword1" >Number of photos</label>
+                        <input type="text" name="nbPhotos" class="form-control"  placeholder="Enter the number">
+                        <small id="emailHelp" class="form-text text-muted">Number of photos to load.</small>
                     </div>
-
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="w3-button w3-red fa fa-times" data-dismiss="modal"> Close</button>
+                <button type="submit" class="w3-button w3-green fa fa-plus"> Add</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 <!-- End Modal -->
 
 <!-- Modal -->
@@ -215,9 +241,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Description</label>
-                        <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter description">
-                        <small id="emailHelp" class="form-text text-muted">Describe your folder for remember it.</small>
+
                     </div>
 
 
@@ -225,8 +249,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="w3-button w3-red fa fa-times" data-dismiss="modal">Close</button>
+                <button type="button" class="w3-button w3-green fa fa-plus">Add</button>
             </div>
         </div>
     </div>
@@ -238,6 +262,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         location.href = '/logout';
 
     }
+	
+	function validateForm() {
+  var x = document.forms["formAddTagAlbum"]["tag"].value;
+  if (x == "") {
+    alert("Tag must be filled out");
+    return false;
+  }
+}
+
+
+
 </script>
 </html>
 
