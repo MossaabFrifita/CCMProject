@@ -30,5 +30,10 @@ class Album {
         $requete_preparee = $this->conn->prepare($requete);
         $requete_preparee->execute($valeurs);
     }
+    public function deleteAlbum($id){
+        $requete = "DELETE FROM cataloguetag WHERE id=$id";
+        $requete_preparee = $this->conn->prepare($requete);
+        $requete_preparee->execute();
+    }
 }
 

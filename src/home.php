@@ -1,9 +1,12 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['loggedIn'])){
     echo "<script type='text/javascript'>document.location.replace('index.php');</script>";
 
 }
+include "getAlbums.php";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -177,62 +180,19 @@ div.desc {
   </header>
 <!-- End page content -->
 
+<?php foreach ($list as $row) { ?>
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
       <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
     </a>
-    <div class="desc">#Tunisia</br>
-                           <i class="material-icons button delete">Delete</i></div>
+    <div class="desc">#<?php echo $row["tag"]; echo " "; echo $row["nb_tag"]; ?> photo(s)</br>
+    <i class="material-icons button delete"><a href ="https://insatgramposter.appspot.com/deleteAlbum?id=<?php echo $row["id"]; ?>" onclick="return confirm('Are you sure?')">delete</a></i></div>
   </div>
 </div>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
-      <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">#Tunisia</br>
-                           <i class="material-icons button delete">Delete</i></div>
-  </div>
+<?php } ?>
 </div>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
-      <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">#Tunisia</br>
-                           <i class="material-icons button delete">delete</i></div>
-  </div>
-</div>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
-      <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">#Tunisia</br>
-                           <i class="material-icons button delete">delete</i></div>
-  </div>
-</div>
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
-      <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">#Tunisia</br>
-                           <i class="material-icons button delete">delete</i></div>
-  </div>
-</div>
-
-<div class="responsive">
-  <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/images/album.jpg">
-      <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Forest" width="600" height="400">
-    </a>
-    <div class="desc">#Tunisia</br>
-                <i class="material-icons button delete">delete</i></div>
-  </div>
-</div>
-</div>
+<form name="formAddTagAlbum" action="0bdf0dbfd352fea6439ef063ca91233b" onsubmit="return validateForm()" method="GET">
 <!-- Modal -->
 <div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -247,24 +207,25 @@ div.desc {
                 <form>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Tag</label>
-                        <input type="text" class="form-control"  placeholder="#tag">
+                        <input type="text" name="tag" class="form-control"  placeholder="#tag">
                         <small id="emailHelp" class="form-text text-muted">Add tag without space.</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Number of photos</label>
-                        <input type="text" class="form-control"  placeholder="Enter the number">
+                        <label for="exampleInputPassword1" >Number of photos</label>
+                        <input type="text" name="nbPhotos" class="form-control"  placeholder="Enter the number">
                         <small id="emailHelp" class="form-text text-muted">Number of photos to load.</small>
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="w3-button w3-red fa fa-times" data-dismiss="modal">Close</button>
-                <button type="button" class="w3-button w3-green fa fa-plus">Add</button>
+                <button type="button" class="w3-button w3-red fa fa-times" data-dismiss="modal"> Close</button>
+                <button type="submit" class="w3-button w3-green fa fa-plus"> Add</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 <!-- End Modal -->
 
 <!-- Modal -->
@@ -301,6 +262,17 @@ div.desc {
         location.href = '/logout';
 
     }
+	
+	function validateForm() {
+  var x = document.forms["formAddTagAlbum"]["tag"].value;
+  if (x == "") {
+    alert("Tag must be filled out");
+    return false;
+  }
+}
+
+
+
 </script>
 </html>
 
