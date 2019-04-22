@@ -17,7 +17,7 @@ $nbPhotos = $_GET['nbPhotos'];
 $userid = $_SESSION['id'];
 
 
-if (null == $album->getAlbumbyTagAndSize($tag,$nbPhotos)) {
+if (null == $album->getAlbumbyTagAndSize($tag,$nbPhotos,$userid)) {
     $album->addAlbum($tag,$nbPhotos,$userid);
     header('Location: https://insatgramposter.appspot.com/home?status=success');
 }else{

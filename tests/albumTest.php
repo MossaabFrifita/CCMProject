@@ -67,7 +67,7 @@ class albumTest extends TestCase {
 
         $id =  $album->addAlbum("tag",10,1);
 
-        $this->assertNotNull($album->getAlbumbyTagAndSize("tag",10));
+        $this->assertNotNull($album->getAlbumbyTagAndSize("tag",10,1));
 
 
     }

@@ -38,9 +38,9 @@ class Album {
         $requete_preparee->execute();
         return true;
     }
-    public function getAlbumbyTagAndSize($tag,$size) {
-        $valeurs = ['tag'=>$tag, 'nbtag'=>$size];
-        $requete = 'SELECT * FROM cataloguetag WHERE tag=:tag AND nb_tag=:nbtag';
+    public function getAlbumbyTagAndSize($tag,$size,$id) {
+        $valeurs = ['tag'=>$tag, 'nbtag'=>$size, 'id'=>$id];
+        $requete = 'SELECT * FROM cataloguetag WHERE tag=:tag AND nb_tag=:nbtag AND user_id=:id';
 
         $requete_preparee = $this->conn->prepare($requete);
         $requete_preparee->execute($valeurs);
