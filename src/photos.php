@@ -1,31 +1,41 @@
 
 <?php
-
+function get_http_response_code($url) {
+    $headers = get_headers($url);
+    return substr($headers[0], 9, 3);
+}
 
 function scrape_insta_hash($tag) {
-	$insta_source = file_get_contents('https://www.instagram.com/explore/tags/'.$tag.'/'); // instagrame tag url
-	$shards = explode('window._sharedData = ', $insta_source);
-	$insta_json = explode(';</script>', $shards[1]); 
-	$insta_array = json_decode($insta_json[0], TRUE);
-	return $insta_array; // this return a lot things print it and see what else you need
+    if(get_http_response_code('https://www.instagram.com/explore/tags/'.$tag.'/') != "200"){
+        echo "This tag is not available at the moment. Try again later or delete the album";
+        return null;
+    }else{
+
+        $insta_source = file_get_contents('https://www.instagram.com/explore/tags/'.$tag.'/');
+        $shards = explode('window._sharedData = ', $insta_source);
+        $insta_json = explode(';</script>', $shards[1]);
+
+        $insta_array = json_decode($insta_json[0], TRUE);
+        return $insta_array; // this return a lot things print it and see what else you need
+    }
 }
-$tag = $_GET['tag']; // tag for which ou want images
+$tag = $_GET['tag'];
 $results_array = scrape_insta_hash($tag);
-$limit = 15;
+$limit = $_GET['limit'];
 $image_array= array(); // array to store images.
-	for ($i=0; $i < $limit; $i++) { 
-		//previous code to get images from json 	
-		//$latest_array = $results_array['entry_data']['TagPage'][0]['tag']['media']['nodes'][$i];	
-		//new code to get images from json 	
-		$latest_array = $results_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'][$i]['node'];
-	 	$image_data  = '<img src="'.$latest_array['thumbnail_src'].'" width="600" height="400">'; // thumbnail and same sizes
-	 	//$image_data  = '<img src="'.$latest_array['display_src'].'">'; actual image and different sizes 
-		array_push($image_array, $image_data);
-	}
+	for ($i=0; $i < $limit; $i++) {
+        if (isset($results_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'][$i]['node'])) {
+            $latest_array = $results_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'][$i]['node'];
+            $image_data = '<img src="' . $latest_array['thumbnail_src'] . '" width="600" height="400">';
+            array_push($image_array, $image_data);
+        }
+
+    }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    
 	<style>
 		div.gallery {
 			border: 1px solid #ccc;

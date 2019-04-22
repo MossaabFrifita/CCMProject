@@ -9,7 +9,14 @@ if ($_SERVER['PATH_INFO'] == '/') {
     include './src/logout.php';
 }elseif ($_SERVER['PATH_INFO'] == '/photos') {
     include './src/photos.php';
+}elseif ($_SERVER['PATH_INFO'] == '/0bdf0dbfd352fea6439ef063ca91233b') {
+    include './src/AddAlbum.php';
+}elseif ($_SERVER['PATH_INFO'] == '/test') {
+    include './src/test.php';
+}elseif ($_SERVER['PATH_INFO'] == '/deleteAlbum') {
+    include './src/DeleteAlbum.php';
 }
+
  else {
     include './src/index.php';
 }

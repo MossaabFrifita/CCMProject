@@ -15,6 +15,10 @@ $album = new \insset\Album($pdo);
 $tag =$_GET['tag'];
 $nbPhotos = $_GET['nbPhotos'];
 $userid = $_SESSION['id'];
-$album->addAlbum($tag,$nbPhotos,$userid);
 
-header('Location: https://insatgramposter.appspot.com/home');
+
+if (null == $album->getAlbumbyTagAndSize($tag,$nbPhotos,$userid)) {
+    $album->addAlbum($tag,$nbPhotos,$userid);
+    header('Location: https://insatgramposter.appspot.com/home?status=success');
+}else{
+header('Location: https://insatgramposter.appspot.com/home?status=echec');}

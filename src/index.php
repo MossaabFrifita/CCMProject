@@ -55,21 +55,21 @@ require "instagramAPI.php";
 					<label>Email Address</label>
 					<div class="input-group">
 						<span class="fa fa-envelope" aria-hidden="true"></span>
-						<input type="email" placeholder="Enter Your Email" required=""> 
+						<input type="email" placeholder="Enter Your Email" >
 					</div>
 					<label>Password</label>
 					<div class="input-group">
 						<span class="fa fa-lock" aria-hidden="true"></span>
-						<input type="Password" placeholder="Enter Password" required="">
+						<input type="Password" placeholder="Enter Password" >
 					</div> 
 					<div class="login-check">
 						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Remember me</label>
 					</div>						
-						<button class="btn btn-danger btn-block" type="submit">Login</button >
-						<a onclick="javascript:window.location='<?php echo $instagram->getLoginURL() ?>'" class="btn btn-danger btn-block fa fa-instagram" >With Instagram</a >
+						<button onclick="login()" class="btn btn-danger btn-block" type="submit">Login</button >
+						<a onclick="javascript:window.location='<?php echo $instagram->getLoginURL() ?>'" class="btn btn-danger btn-block" >With Instagram</a >
 				</form>
-				<p class="account">By clicking login, you agree to our <a href="#">Terms & Conditions!</a></p>
-				<p class="account1">Dont have an account? <a href="#">Register here</a></p>
+                <p class="account">Instagram account <a href="#">Login : infokingfr@gmail.com Password : azerty123321.</a></p>
+				<p class="account1">Dont have an account? <a onclick="login()" href="#">Register here</a></p>
 			</div>
 		</div>
 		<!-- //main content -->
@@ -80,6 +80,12 @@ require "instagramAPI.php";
 	</div>
 	<!-- footer -->
 </div>
-	
-</body>
+<script>
+    function login() {
+      alert('This function is not available at the moment you must authenticate with your instagram account. You can use This account for test UserName: infokingfr@gmail.com Password : azerty123321');
+
+    }
+</script>
+
+    </body>
 </html>

@@ -5,6 +5,12 @@ if(!isset($_SESSION['loggedIn'])){
     echo "<script type='text/javascript'>document.location.replace('index.php');</script>";
 
 }
+if( $_GET['status'] == 'success') {
+    echo "<script type='text/javascript'>alert('Added successfully');</script>";
+}
+else if( $_GET['status'] == 'echec'){
+    echo "<script type='text/javascript'>alert('ERROR : The album is already in your list');</script>";
+}
 include "getAlbums.php";
 
 ?>
@@ -183,7 +189,7 @@ div.desc {
 <?php foreach ($list as $row) { ?>
 <div class="responsive">
   <div class="gallery">
-    <a target="_blank" href="https://insatgramposter.appspot.com/photos?tag=<?php echo $row["tag"]; ?>">
+    <a target="_blank" href="https://insatgramposter.appspot.com/photos?tag=<?php echo $row["tag"]; ?>&limit=<?php echo $row["nb_tag"]; ?>">
       <img src="https://insatgramposter.appspot.com/images/album.jpg" alt="Cinque Terre" width="600" height="400">
     </a>
     <div class="desc">#<?php echo $row["tag"]; echo " "; echo $row["nb_tag"]; ?> photo(s)</br>
@@ -206,12 +212,12 @@ div.desc {
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Tag</label>
+                        <label >Tag</label>
                         <input type="text" name="tag" class="form-control"  placeholder="#tag">
                         <small id="emailHelp" class="form-text text-muted">Add tag without space.</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1" >Number of photos</label>
+                        <label  >Number of photos</label>
                         <input type="text" name="nbPhotos" class="form-control"  placeholder="Enter the number">
                         <small id="emailHelp" class="form-text text-muted">Number of photos to load.</small>
                     </div>
@@ -265,10 +271,23 @@ div.desc {
 	
 	function validateForm() {
   var x = document.forms["formAddTagAlbum"]["tag"].value;
+  var y = document.forms["formAddTagAlbum"]["nbPhotos"].value;
+
   if (x == "") {
     alert("Tag must be filled out");
     return false;
   }
+
+  if(y == ""){
+      alert("Numbre of photos must be filled out");
+      return false;
+  }
+
+    if(isNaN(y) != false){
+        alert("Numbre of photos error : INVALIDE FORMAT ");
+        return false;
+    }
+
 }
 
 
