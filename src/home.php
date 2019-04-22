@@ -5,6 +5,12 @@ if(!isset($_SESSION['loggedIn'])){
     echo "<script type='text/javascript'>document.location.replace('index.php');</script>";
 
 }
+if( $_GET['status'] == 'success') {
+    echo "<script type='text/javascript'>alert('Added successfully');</script>";
+}
+else if( $_GET['status'] == 'echec'){
+    echo "<script type='text/javascript'>alert('ERROR : The album is already in your list');</script>";
+}
 include "getAlbums.php";
 
 ?>

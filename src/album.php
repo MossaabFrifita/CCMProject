@@ -35,5 +35,13 @@ class Album {
         $requete_preparee = $this->conn->prepare($requete);
         $requete_preparee->execute();
     }
+    public function getAlbumbyTagAndSize($tag,$size) {
+        $valeurs = ['tag'=>$tag, 'nbtag'=>$size];
+        $requete = 'SELECT * FROM cataloguetag WHERE tag=:tag AND nb_tag=:nbtag';
+
+        $requete_preparee = $this->conn->prepare($requete);
+        $requete_preparee->execute($valeurs);
+        return $requete_preparee->fetchAll();
+    }
 }
 
