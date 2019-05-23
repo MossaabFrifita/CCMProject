@@ -15,6 +15,15 @@ if ($_SERVER['PATH_INFO'] == '/') {
     include './src/test.php';
 }elseif ($_SERVER['PATH_INFO'] == '/deleteAlbum') {
     include './src/DeleteAlbum.php';
+}elseif ($_SERVER['PATH_INFO'] == '/location') {
+    include './src/location.php';
+}
+elseif ($_SERVER['PATH_INFO'] == '/deleteAlbumLocation') {
+    include './src/DeleteAlbumLocation.php';
+}elseif ($_SERVER['PATH_INFO'] == '/AddAlbumLocation') {
+    include './src/AddLocationAlbum.php';
+}elseif ($_SERVER['PATH_INFO'] == '/fetch') {
+    include './src/fetch.php';
 }
 
  else {
