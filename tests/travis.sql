@@ -25,6 +25,27 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON *.* TO 'dev'@'localhost';
 CREATE DATABASE IF NOT EXISTS `instagram_poster_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `instagram_poster_db`;
 
+--
+-- Structure de la table `cataloguelocation`
+--
+
+DROP TABLE IF EXISTS `cataloguelocation`;
+CREATE TABLE IF NOT EXISTS `cataloguelocation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `locationAdresse` varchar(100) NOT NULL,
+  `photoNumber` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `cataloguelocation`
+--
+
+INSERT INTO `cataloguelocation` (`id`, `locationAdresse`, `photoNumber`, `user_id`) VALUES
+(1, '1245255*365542', 10, 1),
+(3, '1245255*365542', 10, 1);
+
 DROP TABLE IF EXISTS `cataloguetag`;
 CREATE TABLE IF NOT EXISTS `cataloguetag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
