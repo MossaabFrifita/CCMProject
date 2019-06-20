@@ -24,6 +24,8 @@ elseif ($_SERVER['PATH_INFO'] == '/deleteAlbumLocation') {
     include './src/AddLocationAlbum.php';
 }elseif ($_SERVER['PATH_INFO'] == '/fetch') {
     include './src/fetch.php';
+}elseif ($_SERVER['PATH_INFO'] == '/showLocAndTag') {
+    include './src/showLocAndTag.php';
 }
 
  else {

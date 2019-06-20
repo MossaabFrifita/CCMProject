@@ -262,7 +262,8 @@ div.desc {
         <button class="w3-button fa-picture-o"><i class="fa fa-photo w3-margin-right"></i>Albums</button>
         <button class="w3-button w3-green fa fa-plus" data-toggle="modal" data-target="#tagsModal"> Add one with Tags</button>
         <button class="w3-button w3-green fa fa-plus" data-toggle="modal" data-target="#mapsModal"> Add one with Position</button>
-        <button onclick="logout()" style="margin-left: 350px" class="w3-button w3-white"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
+		<button class="w3-button w3-green fa fa-plus" data-toggle="modal" data-target="#locAndTagModal"> Show photos by location and tag </button>
+        <button onclick="logout()" style="margin-left: 100px" class="w3-button w3-white"><i  class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
     </div>
     </div>
   </header>
@@ -395,6 +396,57 @@ div.desc {
 </div>
 </form>
 <!-- End Modal -->
+
+<!-- Modal -->
+<form method="POST" name="formShowLocAndTag" action="showLocAndTag" onsubmit="return validateFormLocAndTag()"> 
+<div class="modal fade" id="locAndTagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Show photos by location and tag</h5>
+
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label >Tag</label></br>
+							<select name="TAGS">
+							<?php foreach ($list as $row) { ?>
+							  <option value="<?php echo $row["tag"]; ?>"><?php echo $row["tag"]; ?></option>
+								
+							<?php } ?>
+							</select>
+                    </div>
+					<div class="form-group">
+                     <label>Location</label></br>
+							<select name="Location">
+							<?php foreach ($listAlbumLocation as $row) { ?>
+							  <option value="<?php echo $row["locationAdresse"]; ?>"><?php echo $row["locationAdresse"]; ?></option>
+								
+							<?php } ?>
+							</select>
+                    </div>					
+                    <div class="form-group">
+                        <label  >Number of photos</label>
+                        <input type="text" name="nbPhotosLocTag" class="form-control"  placeholder="Enter the number">
+                        <small id="emailHelp" class="form-text text-muted">Number of photos to load.</small>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="w3-button w3-red fa fa-times" data-dismiss="modal"> Close</button>
+                <button type="submit" class="w3-button w3-green fa fa-eye"> Show</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- End Modal -->
+
+
 </body>
 <script>
     function logout() {
@@ -422,6 +474,26 @@ div.desc {
     }
 
 }
+
+
+function validateFormLocAndTag(){
+	 var y = document.forms["formShowLocAndTag"]["nbPhotosLocTag"].value;
+	  if(y == ""){
+      alert("Numbre of photos must be filled out");
+      return false;
+  }
+
+    if(isNaN(y) != false){
+        alert("Numbre of photos error : INVALIDE FORMAT ");
+        return false;
+    }
+	
+	
+}
+
+
+
+
 	  String.prototype.sansAccent = function(){
     var accent = [
         /[\300-\306]/g, /[\340-\346]/g, // A, a
